@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire-car – Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f0f0f0; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); width: 320px; }
+        h1 { margin-top: 0; font-size: 1.5rem; }
+        input { width: 100%; padding: 0.5rem; margin: 0.4rem 0 1rem; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; padding: 0.6rem; background: #e25c2a; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+        button:hover { background: #c44d20; }
+        .error { color: #c00; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🔥 Fire-car Login</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <p class="error">{{ messages[0] }}</p>
+        {% endif %}
+        {% endwith %}
+        <form method="post">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required autofocus>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+</body>
+</html>
