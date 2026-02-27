@@ -125,7 +125,7 @@ a:hover {
 .carousel-container {
   position: relative;
   overflow: visible;
-  height: 260px;
+  height: 300px;
   background: #000;
 }
 
@@ -133,17 +133,24 @@ a:hover {
   display: flex;
   height: 100%;
   align-items: center;
-  animation: slide 15s linear infinite;
-  margin-left: -100px; /* start some offscreen */
+  transition: transform 0.7s ease;
+  margin-left: -120px; /* start some offscreen */
+}
+.carousel.flipping img {
+  transform: perspective(600px) rotateY(20deg);
+}
+.carousel.flipping {
+  transition: transform 0.4s ease;
 }
 
 .carousel img {
   flex: 0 0 auto;
-  height: 220px;
-  margin: 0 -60px; /* overlap images */
+  height: 300px;
+  margin: 0 -80px; /* overlap more */
   mask-image: radial-gradient(circle, transparent 0%, transparent 5%, black 15%, black 85%, transparent 95%, transparent 100%);
   mask-mode:alpha;
-  transition: transform 0.3s, mask-image 0.3s;
+  transition: transform 0.5s, mask-image 0.5s;
+  transform-origin: center center;
 }
 
 .carousel img.center {
@@ -177,10 +184,6 @@ a:hover {
   width: 32px;
 }
 
-@keyframes slide {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
 
 .hero {
   padding: 5rem 0 3rem;

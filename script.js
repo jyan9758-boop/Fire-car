@@ -49,9 +49,28 @@ function createNav() {
   slideFiles.forEach((_, idx) => {
     const span = document.createElement('span');
     if (idx === 0) span.classList.add('active');
+    span.addEventListener('click', () => gotoIndex(idx));
     nav.appendChild(span);
   });
   carousel.parentElement.appendChild(nav);
+}
+
+let currentIndex = 0;
+function gotoIndex(idx) {
+  if (!imgs || imgs.length === 0) return;
+  currentIndex = idx;
+  const imgWidth = imgs[0].getBoundingClientRect().width;
+  const overlap = 80; // matches CSS margin
+  const offset = -(idx * (imgWidth - overlap));
+  // add flip class for short  animation cue
+  carousel.classList.add('flipping');
+  requestAnimationFrame(() => {
+    carousel.style.transform = `translateX(${offset}px)`;
+  });
+  setTimeout(() => {
+    carousel.classList.remove('flipping');
+    updateCenter();
+  }, 700);
 }
 
 function updateProgress(idx) {
@@ -67,7 +86,7 @@ function updateCenter() {
   const rect = carousel.getBoundingClientRect();
   imgs.forEach((img,i) => {
     img.classList.remove('center');
-    img.style.zIndex = i; // base layering
+    img.style.zIndex = imgs.length - i; // earlier images on top of later ones
   });
   let closest = null;
   let minDist = Infinity;
@@ -80,7 +99,9 @@ function updateCenter() {
   if (closest) {
     closest.classList.add('center');
     closest.style.zIndex = 999; // bring forward
-    updateProgress(imgs.indexOf(closest) % (imgs.length/2));
+    const idx = imgs.indexOf(closest);
+    // due to overlap, the logical index equals idx
+    updateProgress(currentIndex);
   }
 }
 
@@ -88,12 +109,7 @@ function initCarousel() {
   if (!carousel) return;
   populateCarousel();
   imgs = Array.from(carousel.querySelectorAll('img'));
-  // duplicate images for infinite effect
-  imgs.forEach(i => carousel.appendChild(i.cloneNode()));
-  imgs = Array.from(carousel.querySelectorAll('img'));
-  carousel.addEventListener('animationiteration', updateCenter);
-  carousel.addEventListener('mouseover', () => carousel.style.animationPlayState='paused');
-  carousel.addEventListener('mouseout', () => carousel.style.animationPlayState='running');
+  currentIndex = 0;
   updateCenter();
 }
 
