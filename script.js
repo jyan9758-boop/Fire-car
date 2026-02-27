@@ -24,6 +24,24 @@ document.addEventListener('mouseleave', resetCursor);
 const carousel = document.getElementById('carousel');
 let imgs;
 
+// filenames to display (update as needed)
+const slideFiles = [
+  '屏幕截图 2026-02-27 194220.png',
+  '屏幕截图 2026-02-27 194413.png',
+  '屏幕截图 2026-02-27 194424.png',
+  '屏幕截图 2026-02-27 194546.png'
+];
+
+function populateCarousel() {
+  if (!carousel) return;
+  slideFiles.forEach(fn => {
+    const img = document.createElement('img');
+    img.src = 'images/' + fn;
+    img.alt = fn;
+    carousel.appendChild(img);
+  });
+}
+
 function updateCenter() {
   if (!imgs) return;
   const rect = carousel.getBoundingClientRect();
@@ -41,6 +59,7 @@ function updateCenter() {
 
 function initCarousel() {
   if (!carousel) return;
+  populateCarousel();
   imgs = Array.from(carousel.querySelectorAll('img'));
   // duplicate images for infinite effect
   imgs.forEach(i => carousel.appendChild(i.cloneNode()));
