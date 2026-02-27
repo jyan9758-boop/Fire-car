@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>J.yan 的个人网站</title>
+    <meta
+      name="description"
+      content="这是 J.yan 的个人网站，展示个人介绍、项目和联系方式。"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container nav-wrap">
+        <a class="logo" href="#home">J.yan</a>
+        <nav aria-label="主导航">
+          <ul class="nav-list">
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#projects">项目</a></li>
+            <li><a href="#contact">联系我</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero container">
+        <p class="eyebrow">个人主页</p>
+        <h1>你好，我是 J.yan</h1>
+        <p class="subtitle">
+          a learner, keep going
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#projects">查看项目</a>
+          <a class="btn btn-light" href="#contact">联系我</a>
+        </div>
+      </section>
+
+      <section id="about" class="section container">
+        <h2>关于我</h2>
+        <p>
+          我正在持续学习前端开发，喜欢把想法做成实际产品。这个网站就是我的个人展示页，后续会持续更新。
+        </p>
+      </section>
+
+      <section id="projects" class="section container">
+        <h2>项目展示</h2>
+        <p>目前还没有项目展示，正在学习与积累中，后续会持续更新。</p>
+      </section>
+
+      <section id="contact" class="section container">
+        <h2>联系我</h2>
+        <p>邮箱：<a href="mailto:jyan9758@gmail.com">jyan9758@gmail.com</a></p>
+        <button id="copyEmailBtn" class="btn btn-light" type="button">
+          复制邮箱
+        </button>
+        <p id="toast" class="toast" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <small>© <span id="year"></span> J.yan. All rights reserved.</small>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
