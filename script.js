@@ -40,12 +40,35 @@ function populateCarousel() {
     img.alt = fn;
     carousel.appendChild(img);
   });
+  createNav();
+}
+
+function createNav() {
+  const nav = document.createElement('div');
+  nav.className = 'carousel-nav';
+  slideFiles.forEach((_, idx) => {
+    const span = document.createElement('span');
+    if (idx === 0) span.classList.add('active');
+    nav.appendChild(span);
+  });
+  carousel.parentElement.appendChild(nav);
+}
+
+function updateProgress(idx) {
+  const nav = document.querySelector('.carousel-nav');
+  if (!nav) return;
+  nav.childNodes.forEach((el,i) => {
+    el.classList.toggle('active', i === idx);
+  });
 }
 
 function updateCenter() {
   if (!imgs) return;
   const rect = carousel.getBoundingClientRect();
-  imgs.forEach(img => img.classList.remove('center'));
+  imgs.forEach((img,i) => {
+    img.classList.remove('center');
+    img.style.zIndex = i; // base layering
+  });
   let closest = null;
   let minDist = Infinity;
   imgs.forEach(img => {
@@ -54,7 +77,11 @@ function updateCenter() {
     const dist = Math.abs(dx);
     if (dist < minDist) { minDist = dist; closest = img; }
   });
-  if (closest) closest.classList.add('center');
+  if (closest) {
+    closest.classList.add('center');
+    closest.style.zIndex = 999; // bring forward
+    updateProgress(imgs.indexOf(closest) % (imgs.length/2));
+  }
 }
 
 function initCarousel() {
