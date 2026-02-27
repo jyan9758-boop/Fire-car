@@ -1,11 +1,13 @@
 :root {
   color-scheme: light;
-  --bg: #0f172a;
-  --card: #111827;
-  --text: #e5e7eb;
-  --muted: #cbd5e1;
-  --primary: #38bdf8;
-  --primary-hover: #0ea5e9;
+  /* neon‑cyberpunk palette */
+  --bg: #090a10;
+  --card: #141625;
+  --text: #e0e0e0;
+  --muted: #8f8f8f;
+  --primary: #ff0080;
+  --primary-hover: #ff60a0;
+  --accent: #00e5ff;
   --white: #ffffff;
 }
 
@@ -18,9 +20,16 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-  background: radial-gradient(circle at top, #1e293b, var(--bg));
+  background: linear-gradient(135deg, #090a10 0%, #1b1c2a 50%, #090a10 100%);
   color: var(--text);
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  animation: bg-shift 20s infinite alternate;
+}
+
+@keyframes bg-shift {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
 }
 
 a {
@@ -53,10 +62,16 @@ a:hover {
 }
 
 .logo {
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--white);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-shadow: 0 0 4px var(--accent), 0 0 8px var(--accent);
+  transition: color 0.2s ease;
+}
+
+.logo:hover {
+  color: var(--primary);
 }
 
 .nav-list {
@@ -69,10 +84,37 @@ a:hover {
 
 .nav-list a {
   color: var(--muted);
+  position: relative;
+}
+
+.nav-list a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-list a:hover::after {
+  width: 100%;
+}
+
+.nav-list a:hover {
+  color: var(--white);
 }
 
 .hero {
   padding: 5rem 0 3rem;
+  text-align: center;
+  animation: hero-fade 2s ease;
+}
+
+@keyframes hero-fade {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .eyebrow {
@@ -101,14 +143,37 @@ h1 {
 }
 
 .btn {
-  border: none;
-  background: var(--primary);
-  color: #06283d;
+  border: 2px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
   padding: 0.7rem 1.1rem;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-hover);
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  transform: translateX(100%);
+}
+
+.btn:hover {
+  color: var(--white);
+  transform: translateY(-2px);
 }
 
 .btn:hover {
@@ -127,12 +192,50 @@ h1 {
 
 .section h2 {
   margin-top: 0;
+  color: var(--accent);
+  text-shadow: 0 0 6px var(--accent);
+  position: relative;
+}
+
+.section h2::after {
+  content: '';
+  position: absolute;
+  height: 3px;
+  width: 60px;
+  background: var(--primary);
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+
+.card:hover {
+  transform: rotateY(15deg) scale(1.05);
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--primary)60%, transparent);
+  opacity: 0.2;
+  pointer-events: none;
 }
 
 .card {
@@ -159,9 +262,25 @@ h1 {
 }
 
 .footer {
-  border-top: 1px solid rgb(148 163 184 / 20%);
+  border-top: 1px solid #333;
   padding: 1.2rem 0 2rem;
-  color: #94a3b8;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* floating dots */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 200%;
+  height: 200px;
+  background: radial-gradient(circle, var(--accent) 2px, transparent 2px) repeat;
+  background-size: 20px 20px;
+  opacity: 0.1;
+  transform: translateX(-50%);
 }
 
 @media (max-width: 640px) {
