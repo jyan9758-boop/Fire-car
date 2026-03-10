@@ -51,8 +51,50 @@
       </section>
 
       <section id="projects" class="section container">
-        <h2>项目展示</h2>
-        <p>目前还没有项目展示，正在学习与积累中，后续会持续更新。</p>
+        <div class="projects-header">
+          <h2>项目与学习日记</h2>
+          <div class="projects-actions">
+            <button id="createProjectBtn" class="btn">新建项目</button>
+          </div>
+        </div>
+
+        <div id="projectsArea">
+          <div id="projectsList" class="cards" aria-live="polite">
+            <!-- 项目卡片由 script.js 渲染 -->
+          </div>
+
+          <div id="projectView" class="project-view" hidden>
+            <div class="project-view-header">
+              <button id="backToList" class="btn btn-light">返回列表</button>
+              <div class="project-view-actions">
+                <button id="addDiaryBtn" class="btn">+</button>
+              </div>
+            </div>
+            <section id="projectInfo" class="section">
+              <h3 id="projTitle"></h3>
+              <p id="projDesc"></p>
+              <img id="projCover" src="" alt="项目封面" style="max-width:320px;display:block;margin-top:0.5rem;border-radius:8px;border:1px solid rgba(255,255,255,0.06);"/>
+            </section>
+
+            <section id="entriesSection" class="section">
+              <h4>日记条目</h4>
+              <div id="entriesList"></div>
+              <div id="entryEditor" hidden>
+                <h5 id="entryDate"></h5>
+                <label>今天学了什么</label>
+                <textarea id="entryLearn" rows="3"></textarea>
+                <label>遇到什么问题</label>
+                <textarea id="entryProblem" rows="3"></textarea>
+                <label>明天做什么</label>
+                <textarea id="entryTomorrow" rows="2"></textarea>
+                <div style="margin-top:.6rem">
+                  <button id="saveEntryBtn" class="btn">保存条目</button>
+                  <button id="cancelEntryBtn" class="btn btn-light">取消</button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
       </section>
 
       <section id="contact" class="section container">
