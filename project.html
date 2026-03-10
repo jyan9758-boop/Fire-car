@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>项目详情 - J.yan</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container nav-wrap">
+        <a class="logo" href="index.html">J.yan</a>
+        <nav aria-label="主导航">
+          <ul class="nav-list">
+            <li><a href="index.html#about">关于我</a></li>
+            <li><a href="index.html#projects">项目</a></li>
+            <li><a href="index.html#contact">联系我</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container" style="padding:2rem 0">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <h2 id="projTitle">项目标题</h2>
+          <p id="projDesc" class="muted">项目简介</p>
+        </div>
+        <div style="display:flex;gap:.6rem;align-items:center;">
+          <a id="backIndex" class="btn btn-light" href="index.html">返回项目列表</a>
+          <button id="addDiaryBtn" class="btn">+ 日记</button>
+          <button id="editMetaBtn" class="btn btn-light">编辑项目</button>
+        </div>
+      </div>
+
+      <section id="projectInfo" style="margin-top:1rem">
+        <img id="projCover" class="project-cover" src="" alt="项目封面" hidden />
+      </section>
+
+      <section style="margin-top:1.2rem">
+        <h3>日记条目</h3>
+        <div id="entriesList"></div>
+
+        <div id="entryEditor" hidden style="margin-top:.8rem">
+          <h4 id="entryDate"></h4>
+          <label>今天学了什么</label>
+          <textarea id="entryLearn" rows="3"></textarea>
+          <label>遇到什么问题</label>
+          <textarea id="entryProblem" rows="3"></textarea>
+          <label>明天做什么</label>
+          <textarea id="entryTomorrow" rows="2"></textarea>
+          <div style="margin-top:.6rem">
+            <button id="saveEntryBtn" class="btn">保存条目</button>
+            <button id="cancelEntryBtn" class="btn btn-light">取消</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <small>© <span id="year"></span> J.yan. All rights reserved.</small>
+      </div>
+    </footer>
+
+    <script src="project.js"></script>
+  </body>
+</html>

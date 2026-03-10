@@ -1,13 +1,13 @@
 /* --- 简洁暗灰主题样式（覆盖之前的炫光样式） --- */
 :root {
   color-scheme: dark;
-  --bg: #0b0f12;
-  --card: #0f1315;
-  --text: #d7d7d7;
-  --muted: #9aa0a6;
-  --primary: #9ca3af;
-  --primary-hover: #c3c7cc;
-  --accent: #6b7280;
+  --bg: #07080a; /* 更冷的黑灰背景 */
+  --card: #0d0f11;
+  --text: #ffffff; /* 白色文字 */
+  --muted: #bfc6cc;
+  --primary: #ffffff;
+  --primary-hover: #f3f4f6;
+  --accent: #9ca3af;
 }
 
 * { box-sizing: border-box; }

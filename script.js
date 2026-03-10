@@ -216,21 +216,9 @@ function editProjectMeta(id) {
 }
 
 function openProject(id) {
-  const project = findProject(id);
-  if (!project) return;
-  currentProjectId = id;
-  // hide list, show view
-  const list = document.getElementById('projectsList');
-  const view = document.getElementById('projectView');
-  if (list) list.hidden = true;
-  if (view) view.hidden = false;
-  // fill info
-  document.getElementById('projTitle').textContent = project.title;
-  document.getElementById('projDesc').textContent = project.description;
-  const coverEl = document.getElementById('projCover');
-  coverEl.src = project.cover || '';
-  coverEl.style.display = project.cover ? 'block' : 'none';
-  renderEntries();
+  // 导航到独立的项目子页面（project.html?id=...）
+  if (!id) return;
+  window.location.href = `project.html?id=${encodeURIComponent(id)}`;
 }
 
 function backToList() {
@@ -309,6 +297,16 @@ function deleteEntry(entryId) {
 }
 
 // init UI bindings
+// Early binding to help in case load handler is delayed or errors occur
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('createProjectBtn');
+  if (btn) {
+    btn.addEventListener('click', () => { console.log('createProjectBtn clicked'); createProject(); });
+  } else {
+    console.log('createProjectBtn not found on DOMContentLoaded');
+  }
+});
+
 window.addEventListener('load', () => {
   loadProjects(); renderProjectsList();
   const createBtn = document.getElementById('createProjectBtn'); if (createBtn) createBtn.addEventListener('click', createProject);
